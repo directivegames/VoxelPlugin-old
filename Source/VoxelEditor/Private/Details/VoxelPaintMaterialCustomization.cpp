@@ -360,7 +360,11 @@ void FVoxelPaintMaterial_MaterialCollectionChannelCustomization::CustomizeHeader
 
 					Material->SetScalarParameterValue("EditorPreviewSingleIndex", Index);
 
+#if 1 // WITH_DIRECTIVE
+					const FVoxelMaterialCollectionMaterialInfo MaterialInfo{ (uint8)Index, Material, *FString::Printf(TEXT("Index %03d"), Index) };
+#else
 					const FVoxelMaterialCollectionMaterialInfo MaterialInfo{ Index, Material, *FString::Printf(TEXT("Index %03d"), Index) };
+#endif
 					AssetsToMaterials->Add(Material, MaterialInfo);
 					IndicesToMaterials->Add(Index, MaterialInfo);
 				}

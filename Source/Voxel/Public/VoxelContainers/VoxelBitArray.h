@@ -596,7 +596,11 @@ public:
 		{
 			// If we're looking for a false, then we flip the bits - then we only need to find the first one bit
 			const uint32 Bits = bValue ? (DwordArray[DwordIndex]) : ~(DwordArray[DwordIndex]);
+#if 1 // WITH_DIRECTIVE
+			UE_ASSUME(Bits != 0);
+#else
 			ASSUME(Bits != 0);
+#endif
 			const SizeType LowestBitIndex = FMath::CountTrailingZeros(Bits) + (DwordIndex << VoxelNumBitsPerDWORDLogTwo);
 			if (LowestBitIndex < LocalNumBits)
 			{
@@ -639,7 +643,11 @@ public:
 
 		// Flip the bits, then we only need to find the first one bit -- easy.
 		const uint32 Bits = (bValue ? DwordArray[DwordIndex] : ~DwordArray[DwordIndex]) & Mask;
+#if 1 // WITH_DIRECTIVE
+		UE_ASSUME(Bits != 0);
+#else
 		ASSUME(Bits != 0);
+#endif
 
 		uint32 BitIndex = (VoxelNumBitsPerDWORD - 1) - FMath::CountLeadingZeros(Bits);
 
@@ -672,7 +680,11 @@ public:
 		{
 			// Flip the bits, then we only need to find the first one bit -- easy.
 			const uint32 Bits = ~(DwordArray[DwordIndex]);
+#if 1 // WITH_DIRECTIVE
+			UE_ASSUME(Bits != 0);
+#else
 			ASSUME(Bits != 0);
+#endif
 			const uint32 LowestBit = (Bits) & (-(int32)Bits);
 			const SizeType LowestBitIndex = FMath::CountTrailingZeros(Bits) + (DwordIndex << VoxelNumBitsPerDWORDLogTwo);
 			if (LowestBitIndex < LocalNumBits)
@@ -716,7 +728,11 @@ public:
 
 		// Flip the bits, then we only need to find the first one bit -- easy.
 		const uint32 Bits = ~DwordArray[DwordIndex] & Mask;
+#if 1 // WITH_DIRECTIVE
+		UE_ASSUME(Bits != 0);
+#else
 		ASSUME(Bits != 0);
+#endif
 
 		uint32 BitIndex = (VoxelNumBitsPerDWORD - 1) - FMath::CountLeadingZeros(Bits);
 		DwordArray[DwordIndex] |= 1u << BitIndex;

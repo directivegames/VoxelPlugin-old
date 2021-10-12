@@ -1,4 +1,4 @@
-﻿{
+{
 	"FileVersion": 3,
 	"Version": 1,
 	"VersionName": "Free-Beta-415230fff-2021-06-08",
@@ -19,46 +19,22 @@
 		{
 			"Name": "Voxel",
 			"Type": "Runtime",
-			"LoadingPhase": "PostConfigInit",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android",
-				"Mac"
-			]
+			"LoadingPhase": "PostConfigInit"
 		},
 		{
 			"Name": "VoxelGraph",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android",
-				"Mac"
-			]
+			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "VoxelFoliage",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android",
-				"Mac"
-			]
+			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "VoxelHelpers",
 			"Type": "Runtime",
-			"LoadingPhase": "PostConfigInit",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android",
-				"Mac"
-			]
+			"LoadingPhase": "PostConfigInit"
 		},
 		{
 			"Name": "VoxelVDB",
@@ -79,13 +55,7 @@
 		{
 			"Name": "VoxelNiagara",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android",
-				"Mac"
-			]
+			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "VoxelEditor",
@@ -120,22 +90,12 @@
 		{
 			"Name": "VoxelExamples",
 			"Type": "Runtime",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Android"
-			]
+			"LoadingPhase": "Default"
 		},
 		{
 			"Name": "VoxelLegacySpawners",
 			"Type": "Editor",
-			"LoadingPhase": "Default",
-			"WhitelistPlatforms": [
-				"Win64",
-				"Linux",
-				"Mac"
-			]
+			"LoadingPhase": "Default"
 		}
 	],
 	"Plugins": [
