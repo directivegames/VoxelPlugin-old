@@ -44,7 +44,7 @@
 #include "Misc/MessageDialog.h"
 #include "Serialization/BufferArchive.h"
 #include "UObject/ConstructorHelpers.h"
-#include "HAL/PlatformFilemanager.h"
+#include "HAL/PlatformFileManager.h"
 #include "Materials/Material.h"
 #include "Materials/MaterialInterface.h"
 #include "Components/BillboardComponent.h"
