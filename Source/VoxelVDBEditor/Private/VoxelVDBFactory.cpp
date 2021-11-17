@@ -133,7 +133,15 @@ bool UVoxelVDBFactory::DoImport(UVoxelVDBAsset& Asset, const FString& Path, cons
 		});
 
 		FPropertyEditorModule& PropertyEditorModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
+#if 1 // WITH_DIRECTIVE
+		FDetailsViewArgs DetailsViewArgs;
+		DetailsViewArgs.bUpdatesFromSelection = false;
+		DetailsViewArgs.bLockable = false;
+		DetailsViewArgs.bAllowSearch = false;
+		DetailsViewArgs.NameAreaSettings = FDetailsViewArgs::HideNameArea;
+#else
 		FDetailsViewArgs DetailsViewArgs(false, false, false, FDetailsViewArgs::HideNameArea);
+#endif
 
 		auto DetailsPanel = PropertyEditorModule.CreateDetailView(DetailsViewArgs);
 		DetailsPanel->SetObject(this);

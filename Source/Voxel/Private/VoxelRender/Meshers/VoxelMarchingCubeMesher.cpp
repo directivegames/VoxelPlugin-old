@@ -373,7 +373,11 @@ TVoxelSharedPtr<FVoxelChunkMesh> FVoxelMarchingCubeMesher::CreateFullChunkImpl(F
 		
 		const int32 NumTriangles = Indices.Num() / 3;
 		const int32 NumSquares = FVoxelUtilities::DivideCeil(NumTriangles, 2);
+#if 1 // WITH_DIRECTIVE
+		const int32 NumSquaresPerRow = FMath::CeilToInt(FMath::Sqrt((float)NumSquares));
+#else
 		const int32 NumSquaresPerRow = FMath::CeilToInt(FMath::Sqrt(NumSquares));
+#endif
 		check(NumSquares <= NumSquaresPerRow * NumSquaresPerRow);
 
 		const int32 TextureUVSize = 1;

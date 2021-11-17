@@ -24,6 +24,10 @@
 #include "PropertyCustomizationHelpers.h"
 #include "LevelEditor.h"
 
+#if 1 // WITH_DIRECTIVE
+#include "ThumbnailRendering/ThumbnailManager.h"
+#endif
+
 void SVoxelGraphNode::Construct(const FArguments& InArgs, class UVoxelGraphNode_Base* InNode)
 {
 	GraphNode = InNode;
@@ -715,7 +719,11 @@ void SVoxelAssetPickerGraphNode::CreateBelowPinControls(TSharedPtr<SVerticalBox>
 		const float CentralPadding = 0.0f;
 		
 		FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
+#if 1 // WITH_DIRECTIVE
+		TSharedPtr<FAssetThumbnailPool> ThumbnailPool = UThumbnailManager::Get().GetSharedThumbnailPool();
+#else
 		TSharedPtr<FAssetThumbnailPool> ThumbnailPool = LevelEditorModule.GetFirstLevelEditor()->GetThumbnailPool();
+#endif
 		
 		LeftNodeBox->AddSlot()
 		.Padding(FMargin(NegativeHPad + ExtraPad, 0.0f, 0.0f, 0.0f))

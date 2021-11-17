@@ -47,7 +47,12 @@ void UNiagaraDataInterfaceVoxelDataAsset::PostInitProperties()
 
 	if (HasAnyFlags(RF_ClassDefaultObject))
 	{
+#if 1 // WITH_DIRECTIVE
+		const auto Flags = ENiagaraTypeRegistryFlags::AllowUserVariable | ENiagaraTypeRegistryFlags::AllowSystemVariable | ENiagaraTypeRegistryFlags::AllowEmitterVariable | ENiagaraTypeRegistryFlags::AllowParameter;
+		FNiagaraTypeRegistry::Register(FNiagaraTypeDefinition(GetClass()), Flags);
+#else
 		FNiagaraTypeRegistry::Register(FNiagaraTypeDefinition(GetClass()), true, false, false);
+#endif
 	}
 }
 

@@ -14,7 +14,11 @@ FColor FVoxelDistanceFieldUtilities::GetDistanceFieldColor(float Value)
 	FLinearColor Color = FLinearColor::White - FMath::Sign(Value) * FLinearColor(0.1, 0.4, 0.7, 0.f);
 	Color *= 1.0 - FMath::Exp(-3.0 * FMath::Abs(Value));
 	Color *= 0.8 + 0.2 * FMath::Cos(150.0 * Value);
+#if 1 // WITH_DIRECTIVE
+	Color = FMath::Lerp(Color, FLinearColor::White, 1.0 - FMath::SmoothStep(0.0f, 0.01f, FMath::Abs(Value)));
+#else
 	Color = FMath::Lerp(Color, FLinearColor::White, 1.0 - FMath::SmoothStep(0.0, 0.01, FMath::Abs(Value)));
+#endif
 	Color.A = 1.f;
 	return FLinearColor(Color.ToFColor(false)).ToFColor(false);
 }

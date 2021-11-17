@@ -85,9 +85,15 @@ static void GetMergedSectionFromStaticMesh(
 				Vertices.SetNumUninitialized(PositionVertexBuffer.GetNumVertices());
 				const int32 NumBytes = PositionVertexBuffer.GetNumVertices() * PositionVertexBuffer.GetStride();
 				
+#if 1 // WITH_DIRECTIVE
+				void* BufferData = RHICmdList.LockBuffer(PositionVertexBuffer.VertexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
+				FMemory::Memcpy(Vertices.GetData(), BufferData, NumBytes);
+				RHICmdList.UnlockBuffer(PositionVertexBuffer.VertexBufferRHI);
+#else
 				void* BufferData = RHICmdList.LockVertexBuffer(PositionVertexBuffer.VertexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
 				FMemory::Memcpy(Vertices.GetData(), BufferData, NumBytes);
 				RHICmdList.UnlockVertexBuffer(PositionVertexBuffer.VertexBufferRHI);
+#endif				
 			}
 			{
 				VOXEL_SCOPE_COUNTER("Copy Triangles from GPU");
@@ -96,7 +102,11 @@ static void GetMergedSectionFromStaticMesh(
 				const bool bIs32Bit = IndexBuffer.Is32Bit();
 				const int32 NumBytes = IndexBuffer.GetNumIndices() * (bIs32Bit ? sizeof(uint32) : sizeof(uint16));
 				
+#if 1 // WITH_DIRECTIVE
+				void* BufferData = RHICmdList.LockBuffer(IndexBuffer.IndexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
+#else
 				void* BufferData = RHICmdList.LockIndexBuffer(IndexBuffer.IndexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
+#endif
 				if (bIs32Bit)
 				{
 					FMemory::Memcpy(Indices.GetData(), BufferData, NumBytes);
@@ -111,7 +121,11 @@ static void GetMergedSectionFromStaticMesh(
 						Get(Indices, Index) = Get(Indices16, Index);
 					}
 				}
+#if 1 // WITH_DIRECTIVE
+				RHICmdList.UnlockBuffer(IndexBuffer.IndexBufferRHI);
+#else
 				RHICmdList.UnlockIndexBuffer(IndexBuffer.IndexBufferRHI);
+#endif
 			}
 			if (NumTextureCoordinates > 0)
 			{
@@ -121,7 +135,11 @@ static void GetMergedSectionFromStaticMesh(
 				const bool bFullPrecision = StaticMeshVertexBuffer.GetUseFullPrecisionUVs();
 				const int32 NumBytes = StaticMeshVertexBuffer.GetNumVertices() * (bFullPrecision ? sizeof(FVector2D) : sizeof(FVector2DHalf));
 				
+#if 1 // WITH_DIRECTIVE
+				void* BufferData = RHICmdList.LockBuffer(StaticMeshVertexBuffer.TexCoordVertexBuffer.VertexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
+#else
 				void* BufferData = RHICmdList.LockVertexBuffer(StaticMeshVertexBuffer.TexCoordVertexBuffer.VertexBufferRHI, 0, NumBytes, EResourceLockMode::RLM_ReadOnly);
+#endif
 				if (bFullPrecision)
 				{
 					FMemory::Memcpy(UVs.GetData(), BufferData, NumBytes);
@@ -136,7 +154,11 @@ static void GetMergedSectionFromStaticMesh(
 						Get(UVs, Index) = Get(UVsHalf, Index);
 					}
 				}
+#if 1 // WITH_DIRECTIVE
+				RHICmdList.UnlockBuffer(StaticMeshVertexBuffer.TexCoordVertexBuffer.VertexBufferRHI);
+#else
 				RHICmdList.UnlockVertexBuffer(StaticMeshVertexBuffer.TexCoordVertexBuffer.VertexBufferRHI);
+#endif
 			}
 		});
 		

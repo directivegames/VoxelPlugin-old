@@ -107,7 +107,15 @@ bool UVoxelHeightmapAssetUINT16Factory::ConfigureProperties()
 	};
 
 	FPropertyEditorModule& PropertyEditorModule = FModuleManager::LoadModuleChecked<FPropertyEditorModule>("PropertyEditor");
+#if 1 // WITH_DIRECTIVE
+	FDetailsViewArgs DetailsViewArgs;
+	DetailsViewArgs.bUpdatesFromSelection = false;
+	DetailsViewArgs.bLockable = false;
+	DetailsViewArgs.bAllowSearch = false;
+	DetailsViewArgs.NameAreaSettings = FDetailsViewArgs::HideNameArea;
+#else
 	FDetailsViewArgs DetailsViewArgs(false, false, false, FDetailsViewArgs::HideNameArea);
+#endif
 
 	auto DetailsPanel = PropertyEditorModule.CreateDetailView(DetailsViewArgs);
 	FOnGetDetailCustomizationInstance LayoutDelegateDetails = FOnGetDetailCustomizationInstance::CreateLambda([]() { return MakeShared<FVoxelHeightmapFactoryDetails>(); });
