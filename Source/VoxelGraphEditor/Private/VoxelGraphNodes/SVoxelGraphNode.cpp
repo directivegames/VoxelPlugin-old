@@ -719,7 +719,7 @@ void SVoxelAssetPickerGraphNode::CreateBelowPinControls(TSharedPtr<SVerticalBox>
 		const float CentralPadding = 0.0f;
 		
 		FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>("LevelEditor");
-#if 1 // WITH_DIRECTIVE
+#if ENGINE_MAJOR_VERSION == 5 // WITH_DIRECTIVE
 		TSharedPtr<FAssetThumbnailPool> ThumbnailPool = UThumbnailManager::Get().GetSharedThumbnailPool();
 #else
 		TSharedPtr<FAssetThumbnailPool> ThumbnailPool = LevelEditorModule.GetFirstLevelEditor()->GetThumbnailPool();

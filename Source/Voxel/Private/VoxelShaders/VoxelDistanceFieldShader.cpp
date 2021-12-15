@@ -107,7 +107,7 @@ void FVoxelDistanceFieldShaderHelper::Compute_RenderThread(
 	
 	{
 		VOXEL_RENDER_SCOPE_COUNTER("Copy Data To Buffers");
-#if 1 // WITH_DIRECTIVE
+#if ENGINE_MAJOR_VERSION == 5 // WITH_DIRECTIVE
 		void* BufferData = RHICmdList.LockBuffer(SrcBuffer.Buffer, 0, SrcBuffer.NumBytes, EResourceLockMode::RLM_WriteOnly);
 		FMemory::Memcpy(BufferData, Data, SrcBuffer.NumBytes);
 		RHICmdList.UnlockBuffer(SrcBuffer.Buffer);
@@ -140,7 +140,7 @@ void FVoxelDistanceFieldShaderHelper::Compute_RenderThread(
 	
 	{
 		VOXEL_RENDER_SCOPE_COUNTER("Copy Data From Buffers");
-#if 1 // WITH_DIRECTIVE
+#if ENGINE_MAJOR_VERSION == 5 // WITH_DIRECTIVE
 		void* BufferData = RHICmdList.LockBuffer(SrcBuffer.Buffer, 0, SrcBuffer.NumBytes, EResourceLockMode::RLM_ReadOnly);
 		FMemory::Memcpy(Data, BufferData, SrcBuffer.NumBytes);
 		RHICmdList.UnlockBuffer(SrcBuffer.Buffer);
