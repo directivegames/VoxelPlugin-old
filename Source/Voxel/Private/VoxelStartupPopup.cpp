@@ -19,6 +19,10 @@ void FVoxelStartupPopup::OnModuleStartup()
 
 void FVoxelStartupPopup::ShowPopup()
 {
+#if 1 // WITH_DIRECTIVE
+	return;
+#endif
+	
 	int32 VoxelPluginVersion = 0;
 	GConfig->GetInt(TEXT("VoxelPlugin"), TEXT("VoxelPluginVersion"), VoxelPluginVersion, GEditorPerProjectIni);
 	
