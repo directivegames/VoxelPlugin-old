@@ -78,6 +78,7 @@ public:
 
 	//~ Begin FGCObject interface
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
+	FString GetReferencerName() const override { return TEXT("FVoxelGraphEditorToolkit"); }
 	//~ End FGCObject interface
 
 	//~ Begin FEditorUndoClient Interface

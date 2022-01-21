@@ -17,6 +17,7 @@ public:
 
 	//~ Begin FGCObject Interface
 	virtual void AddReferencedObjects(FReferenceCollector& Collector) override;
+	FString GetReferencerName() const override { return TEXT("FVoxelDataAssetEditorManager"); }
 	//~ End FGCObject Interface
 
 public:
